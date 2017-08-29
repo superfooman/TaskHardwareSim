@@ -101,7 +101,9 @@ namespace TaskHardwareSim
                 foreach (HWDLL device in HWDLL.Devices)
                 {
                     object taskObject = device;
-                    taskStart.Add(Task.Factory.StartNew(ProgramDeviceTask, taskObject));
+                    
+                    taskStart.Add( Task.Factory.StartNew(() => ProgramDeviceTask(taskObject)) );
+                    // taskStart.Add(Task.Factory.StartNew(ProgramDeviceTask, taskObject));
 
                     if (radioButtonSingleSiteEnable.Checked)
                         taskStart[i].Wait();
